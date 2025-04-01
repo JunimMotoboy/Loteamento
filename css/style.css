@@ -300,7 +300,6 @@ main{
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.744), rgba(0, 0, 0, 0.5)),
               url(../img/ibiza-fundo-media.jpg);
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
