@@ -8,6 +8,20 @@ window.onload = function() {
         item.classList.add('show');
     });
 };
+window.addEventListener("scroll", function() {
+    const logo = document.querySelector(".logo");
+    if (window.scrollY > 100) { 
+        logo.classList.add("scrolled");
+    } else {
+        logo.classList.remove("scrolled");
+    }
+});
+
+// Para ativar os efeitos ao carregar a página
+window.addEventListener("load", function() {
+    document.querySelector(".img-hero").classList.add("loaded");
+});
+
 
 document.addEventListener("scroll", function () {
     let heroSection = document.querySelector(".img-hero");
