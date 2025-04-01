@@ -1,0 +1,34 @@
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 2;
+    
+}
+
+  .carousel {
+    max-width: 400px; /* Largura do card */
+    max-height: 300px; /* Altura do card */
+    margin: auto;
+  }
+
+  .carousel-inner {
+    border-radius: 10px; /* Bordas arredondadas para parecer mais um card */
+    overflow: hidden;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 200px; /* Mantém a altura fixa */
+    object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorção */
+  } 
+  
+  /* txt de card */
+  .carousel-caption {
+    position: relative;
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro translúcido */
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
