@@ -1,46 +1,47 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Ativa a animação da imagem e conteúdo ao carregar
     document.querySelector(".img-hero").classList.add("loaded");
-});
-window.onload = function() {
+
     const listItems = document.querySelectorAll('.hero nav ul li');
-    
-    listItems.forEach(item => {
-        item.classList.add('show');
+    listItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('show');
+        }, index * 200); // Anima os itens com atraso sequencial
     });
-};
-window.addEventListener("scroll", function() {
+});
+
+// Evento de rolagem para animar o logo e controlar o efeito de scroll da imagem
+window.addEventListener("scroll", function () {
     const logo = document.querySelector(".logo");
-    if (window.scrollY > 100) { 
+    const heroSection = document.querySelector(".img-hero");
+    const heroContent = document.querySelector(".hero-content");
+    
+    const scrollPosition = window.scrollY;
+    const heroHeight = heroSection.offsetHeight;
+
+    // Adiciona ou remove a classe de rolagem no logo
+    if (scrollPosition > 100) {
         logo.classList.add("scrolled");
     } else {
         logo.classList.remove("scrolled");
     }
-});
 
-// Para ativar os efeitos ao carregar a página
-window.addEventListener("load", function() {
-    document.querySelector(".img-hero").classList.add("loaded");
-});
-
-
-document.addEventListener("scroll", function () {
-    let heroSection = document.querySelector(".img-hero");
-    let heroContent = document.querySelector(".hero-content");
-
-    let scrollPosition = window.scrollY;
-    let heroHeight = heroSection.offsetHeight;
-
-    // Quando o usuário rolar além da metade da imagem
+    // Controla o efeito do conteúdo da seção hero (subir e desaparecer)
     if (scrollPosition > heroHeight / 2) {
-        heroContent.classList.add("scroll-effect"); // Faz o texto subir e sumir
+        heroContent.classList.add("scroll-effect");
     } else {
         heroContent.classList.remove("scroll-effect");
     }
 
-    // Quando a rolagem for maior que a altura da imagem, a imagem desaparece
+    // Controla o desaparecimento da imagem hero
     if (scrollPosition > heroHeight) {
         heroSection.classList.add("scroll-fade");
     } else {
         heroSection.classList.remove("scroll-fade");
     }
+});
+
+// Inicializa o carregamento da imagem hero com um pequeno delay para suavizar
+window.addEventListener("load", function() {
+    document.querySelector(".img-hero").classList.add("loaded");
 });
