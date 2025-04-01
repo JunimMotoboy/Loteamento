@@ -282,10 +282,11 @@ main{
 }
 .img-foot{
   height: 40px;
+  width: auto;
 }
 @media (max-width: 1200px) {
   .hero-content h1 {
-      font-size: 35px;
+      font-size: 12px;
   }
   .hero-content p {
     font-size: 15px;
