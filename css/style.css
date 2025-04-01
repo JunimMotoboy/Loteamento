@@ -29,6 +29,9 @@ html {
     top: 0;
     left: 0;
     z-index: 1000; 
+    backdrop-filter: blur(30px);
+    box-shadow:  0px 0px 30px rgba(227, 228, 237, 0.37);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
 }
 
 nav ul {
@@ -58,11 +61,10 @@ nav ul li {
     position: relative;
 }
 .logo{
-    position: absolute;
     top: 10%;
     left: 50%;
-    transform: translateX(-50%);
     transition: all 0.5s ease-in-out;
+   
 }
 .logo img {
     height: 300px; 
@@ -73,6 +75,7 @@ nav ul li {
     top: 10px;
     left: 20px;
     transform: none;
+    z-index: 10000;
 }
 .logo.scrolled img {
     height: 50px;
@@ -118,6 +121,7 @@ nav ul li {
     background-attachment: fixed;
     
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -126,6 +130,7 @@ nav ul li {
   }
   
   .hero-content {
+    margin-top: 15px;
     position: relative;
     color: #fff;
     z-index: 2;
