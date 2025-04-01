@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* outline: 2px solid red; */
+}
+
+/* Estiilos nav  */
+
+.hero {
+    background-color: rgba(8, 8, 8, 0.635); 
+    color: #fff;
+    width: 100vw; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    font-family: "Nunito", sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px; 
+    opacity: 0;
+    transform: translateX(-30px); 
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out; 
+}
+
+/* Efeito de animação após o carregamento da página */
+.hero nav ul li.show {
+    opacity: 1; 
+    transform: translateX(0); 
+}
+
+/* Estilizando os links dentro da navegação */
+.hero a {
+    text-decoration: none;
+    color: whitesmoke; 
+    transition: color 0.3s ease-out, transform 0.3s ease-out, opacity 0.3s ease-out; /
+}
+
+.hero a:hover {
+    color: #fff; 
+    transform: scale(1.2); 
+    opacity: 0.8; 
+}
+
+
+.hero nav ul li:nth-child(1) {
+    transition-delay: 0.2s; 
+}
+
+.hero nav ul li:nth-child(2) {
+    transition-delay: 0.4s;
+}
+
+.hero nav ul li:nth-child(3) {
+    transition-delay: 0.6s; 
+}
+
+/* Estilos div img */
+.img-hero {
+    position: relative; 
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.744), rgba(0, 0, 0, 0.5)),
+                url(../img/ibiza-fundo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden;
+  }
+  
+  .hero-content {
+    color: #fff;
+    z-index: 2;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+  
+
+  .scroll-effect {
+    transform: translateY(-100px); 
+    opacity: 0; 
+  }
+  
+  /* Efeito para a imagem desaparecer */
+  .img-hero.scroll-fade {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+  }
+  
+
+.hero-content {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.hero-content h1,
+.hero-content p {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 2.5s ease-out, transform 1.5s ease-out;
+}
+
+/* Transicao */
+/* Ativar a transição ao carregar */
+.img-hero.loaded .hero-content h1 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.img-hero.loaded .hero-content p {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.9s; 
+}
+
+.hero-content h1 {
+  text-shadow: 4px 4px 4px black;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: 2s ease-in-out;
+}
+
+.hero-content h1:hover {
+  cursor: pointer;
+}
+
+.hero-content p {
+  font-weight: 400;
+}
+
+
+/* carousel */
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 2;
+    
+}
+
+  .carousel {
+    max-width: 400px; /* Largura do card */
+    max-height: 300px; /* Altura do card */
+    margin: auto;
+  }
+
+  .carousel-inner {
+    border-radius: 10px; /* Bordas arredondadas para parecer mais um card */
+    overflow: hidden;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 200px; /* Mantém a altura fixa */
+    object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorção */
+  }
+
