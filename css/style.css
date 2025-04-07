@@ -284,6 +284,28 @@ main{
   height: 40px;
   width: auto;
 }
+.img-modal {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.img-modal img {
+  width: 480px; /* ou outro tamanho que quiser */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.img-modal img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 768px) {
   .hero-content h1 {
       font-size: 12px;
