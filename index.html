@@ -1,397 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loteamento Ibiza</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./img/icone-ibiza.png" type="image/x-icon">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="./img/icone-ibiza.png"
+      type="image/x-icon"
+    />
+  </head>
 
-<header class="hero">
+  <header class="hero">
     <nav class="nav-container">
-        <ul class="nav-links">
-            <li><a href="#lotes">Lotes</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
+      <ul class="nav-links">
+        <li><a href="#lotes">Lotes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
-</header>
+  </header>
 
-
-<body>
-    
+  <body>
     <main>
-        
-        <div class="img-hero">
-            <a href="#" class="logo">
-                <img src="./img/Logo caiçaras.png" alt="Logo Ibiza">
-            </a>
-            <div class="hero-content">
-                <h1>O lugar perfeito para construir seus sonhos espera por você!</h1>
-                
+      <div class="img-hero">
+        <a href="#" class="logo">
+          <img src="./img/Logo caiçaras.png" alt="Logo Ibiza" />
+        </a>
+        <div class="hero-content">
+          <h1>O lugar perfeito para construir seus sonhos espera por você!</h1>
+        </div>
+      </div>
+
+      <div id="lotes" class="content">
+        <!-- Primeiro Card Carrossel -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard1"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
             </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard1"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard1"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Ibiza Town</h5>
+            <p class="card-text">TKBFF-022</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
         </div>
-        
-        <div id="lotes" class="content">
-                                                       <!-- Primeiro Card Carrossel -->
 
-      
-                                                       <div class="card" style="width: 18rem;">
-                                                        <div id="carouselCard1" class="carousel slide" data-bs-ride="carousel">
-                                                            <div class="carousel-inner">
-                                                                <div class="carousel-item active">
-                                                                    <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                                                                </div>
-                                                                <div class="carousel-item">
-                                                                    <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                                                                </div>
-                                                                <div class="carousel-item">
-                                                                    <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                                                                </div>
-                                                            </div>
-                                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard1" data-bs-slide="prev">
-                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                <span class="visually-hidden">Anterior</span>
-                                                            </button>
-                                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselCard1" data-bs-slide="next">
-                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                <span class="visually-hidden">Próximo</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Ibiza Town</h5>
-                                                            <p class="card-text">TKBFF-022</p>
-                                                            <h5>130.000,00 R$</h5>
-                                                            <!-- Botão para abrir o Modal -->
-                                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                Visitar
-                                                            </button>
-                                                            <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <h5>Detalhes do imóvel:</h5>
-                                                                    <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                    <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-        
-                                                       <!-- Segundo card  -->
-
-            <div class="card" style="width: 18rem;">
-                <div id="carouselCard2" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard2" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCard2" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="img-modal">
+                  <img src="./img/lote-1.webp" alt="lote-1" />
+                  <img src="./img/lote-2.webp" alt="lote-2" />
+                  <img src="./img/lote-3.jpg" alt="lote-3" />
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sant Antoni de Portmany</h5>
-                    <p class="card-text">TKBFF-023</p>
-                    <h5>130.000,00 R$</h5>
-                                                           <!-- Botão para abrir o Modal -->
-                                                           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Visitar
-                                                        </button>
-                                                        <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5>Detalhes do imóvel:</h5>
-                                                                <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-            
-                                                      <!-- Terceiro Card -->
-
-            <div class="card" style="width: 18rem;">
-                <div id="carouselCard3" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard3" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCard3" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sant Antoni de Portmany</h5>
-                    <p class="card-text">TKBFF-023</p>
-                    <h5>130.000,00 R$</h5>
-                                                            <!-- Botão para abrir o Modal -->
-                                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                Visitar
-                                                            </button>
-                                                            <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <h5>Detalhes do imóvel:</h5>
-                                                                    <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                    <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-            
-                                                      <!-- Quarto Card  -->
-
-            <div class="card" style="width: 18rem;">
-                <div id="carouselCard4" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard4" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCard4" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sant Antoni de Portmany</h5>
-                    <p class="card-text">TKBFF-023</p>
-                    <h5>130.000,00 R$</h5>
-                                                            <!-- Botão para abrir o Modal -->
-                                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                Visitar
-                                                            </button>
-                                                            <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <h5>Detalhes do imóvel:</h5>
-                                                                    <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                    <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-            
-                                                   <!-- Quinto Card  -->
-
-            <div class="card" style="width: 18rem;">
-                <div id="carouselCard5" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard5" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCard5" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sant Antoni de Portmany</h5>
-                    <p class="card-text">TKBFF-023</p>
-                    <h5>130.000,00 R$</h5>
-                                                           <!-- Botão para abrir o Modal -->
-                                                           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Visitar
-                                                        </button>
-                                                        <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5>Detalhes do imóvel:</h5>
-                                                                <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-            
-                                                                       <!-- Sexto Card  -->
-
-            <div class="card" style="width: 18rem;">
-                <div id="carouselCard6" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/lote-1.webp" class="d-block w-100" alt="Primeiro lote">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-2.webp" class="d-block w-100" alt="Segundo Slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/lote-3.jpg" class="d-block w-100" alt="Terceiro Slide">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard6" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCard6" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sant Antoni de Portmany</h5>
-                    <p class="card-text">TKBFF-023</p>
-                    <h5>130.000,00 R$</h5>
-                                                           <!-- Botão para abrir o Modal -->
-                                                           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Visitar
-                                                        </button>
-                                                        <a href="#" class="btn btn-primary">Entrar em Contato</a>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Informações sobre o imóvel</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5>Detalhes do imóvel:</h5>
-                                                                <p>Aqui estão as informações adicionais sobre o imóvel Ibiza Town, incluindo fotos, características e outros detalhes importantes.</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-primary">Visitar Página</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-             
+                <h5>Detalhes do imóvel:</h5>
+                <ul>
+                  <li> <b> Código do Terreno:</b> TKBFF-022 </li>
+                  <li><b> Valor:</b> 130.000,00</li>
+                  <li><b> Tamanho:</b> 200mts </li>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+                
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="btn-card">Ver Mais</button>
 
+        <!-- Segundo card  -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard2"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard2"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard2"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sant Antoni de Portmany</h5>
+            <p class="card-text">TKBFF-023</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h5>Detalhes do imóvel:</h5>
+                <p>
+                  Aqui estão as informações adicionais sobre o imóvel Ibiza
+                  Town, incluindo fotos, características e outros detalhes
+                  importantes.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terceiro Card -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard3"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard3"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard3"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sant Antoni de Portmany</h5>
+            <p class="card-text">TKBFF-023</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h5>Detalhes do imóvel:</h5>
+                <p>
+                  Aqui estão as informações adicionais sobre o imóvel Ibiza
+                  Town, incluindo fotos, características e outros detalhes
+                  importantes.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quarto Card  -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard4"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard4"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard4"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sant Antoni de Portmany</h5>
+            <p class="card-text">TKBFF-023</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h5>Detalhes do imóvel:</h5>
+                <p>
+                  Aqui estão as informações adicionais sobre o imóvel Ibiza
+                  Town, incluindo fotos, características e outros detalhes
+                  importantes.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quinto Card  -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard5"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard5"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard5"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sant Antoni de Portmany</h5>
+            <p class="card-text">TKBFF-023</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h5>Detalhes do imóvel:</h5>
+                <p>
+                  Aqui estão as informações adicionais sobre o imóvel Ibiza
+                  Town, incluindo fotos, características e outros detalhes
+                  importantes.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sexto Card  -->
+
+        <div class="card" style="width: 18rem">
+          <div
+            id="carouselCard6"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/lote-1.webp"
+                  class="d-block w-100"
+                  alt="Primeiro lote"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-2.webp"
+                  class="d-block w-100"
+                  alt="Segundo Slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/lote-3.jpg"
+                  class="d-block w-100"
+                  alt="Terceiro Slide"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselCard6"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselCard6"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Sant Antoni de Portmany</h5>
+            <p class="card-text">TKBFF-023</p>
+            <h5>130.000,00 R$</h5>
+            <!-- Botão para abrir o Modal -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Visitar
+            </button>
+            <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+              Entrar em Contato
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Informações sobre o imóvel
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <img src="./img/lote-1.webp" alt="lote-1" />
+                <h5>Detalhes do imóvel:</h5>
+                <p>
+                  Aqui estão as informações adicionais sobre o imóvel Ibiza
+                  Town, incluindo fotos, características e outros detalhes
+                  importantes.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fechar
+                </button>
+                <button onclick="window.location.href='https://api.whatsapp.com/send?phone=55996778018'" type="button" class="btn btn-primary">
+                  Entrar em Contato
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-card">Ver Mais</button>
     </main>
     <footer id="contato" class="footer">
-        <div class="container">
-            <img class="img-foot" src="./img/GRUPO VECCHI.jpg" alt="">
-            <p><strong>Grupo VECCHI</strong></p>
-            <p>📍 Endereço: Av. dos Loteamentos, 123 - Cidade, Estado</p>
-            <p>📞 Contato: (34) 99999-9999</p>
-            <p>✉️ E-mail: contato@ibizaloteamentos.com</p>
-        </div>
+      <div class="container">
+        <img class="img-foot" src="./img/GRUPO VECCHI.jpg" alt="" />
+        <p><strong>Grupo VECCHI</strong></p>
+        <p>📍 Endereço: Av. dos Loteamentos, 123 - Cidade, Estado</p>
+        <p>📞 Contato: (34) 99999-9999</p>
+        <p>✉️ E-mail: contato@ibizaloteamentos.com</p>
+      </div>
     </footer>
-    
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/script.js"></script>
-
-</body>
-
+  </body>
 </html>
