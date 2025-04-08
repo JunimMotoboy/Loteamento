@@ -71,10 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <h5 class="card-title">${titulo}</h5>
           <p class="card-text">${codigo}</p>
           <h5>R$ ${valor} </h5>
+          <div class"buttons">
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${modalId}">Visitar</button>
           <button onclick="window.location.href='https://api.whatsapp.com/send?phone=${telefone}'" type="button" class="btn btn-success">
             Contato
           </button>
+          </div>
         </div>
       </div>
   
