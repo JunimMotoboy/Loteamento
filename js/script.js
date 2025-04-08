@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     codigo: "TKBFF-022",
     valor: "130.000,00",
     tamanho: "200mts",
-    telefone: "55999999999"
+    telefone: "5534996778018"
   });
   
   criarCard({
