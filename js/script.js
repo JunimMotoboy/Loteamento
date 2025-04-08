@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h5 class="card-title">${titulo}</h5>
           <p class="card-text">${codigo}</p>
           <h5>R$ ${valor} </h5>
-          <div class"buttons">
+          <div class="buttons">
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${modalId}">Visitar</button>
           <button onclick="window.location.href='https://api.whatsapp.com/send?phone=${telefone}&text=Ola, tenho interesse no ${titulo}'" type="button" class="btn btn-success">
             Contato
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   criarCard({
     id: 1,
     imagens: ["./img/lote-1.webp", "./img/lote-2.webp", "./img/lote-3.jpg"],
-    titulo: "Ibiza Town",
+    titulo: "Long Town",
     codigo: "TKBFF-022",
     valor: "130.000,00",
     tamanho: "200mts",
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   criarCard({
     id: 2,
     imagens: ["./img/lote-1.webp", "./img/lote-2.webp", "./img/lote-3.jpg"],
-    titulo: "Ibiza Town",
+    titulo: "Ibiza ",
     codigo: "TKBFF-022",
     valor: "130.000,00",
     tamanho: "200mts",
@@ -144,9 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   criarCard({
-    id: 3,
+    id: 4,
     imagens: ["./img/lote-1.webp", "./img/lote-2.webp", "./img/lote-3.jpg"],
-    titulo: "Naked",
+    titulo: "Norman Whiston",
     codigo: "TKBFF-022",
     valor: "130.000,00",
     tamanho: "200mts",
