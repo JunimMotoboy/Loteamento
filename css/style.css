@@ -55,10 +55,11 @@ nav ul li {
 }
 .nav-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100%;
     position: relative;
+    margin-right: 80px;
 }
 .logo{
     top: 10%;
@@ -214,11 +215,17 @@ main{
 .card{
     box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
-.card-body .card-title{
+.card-body {
   text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
 }
-.buttons{
-text-align: center;
+.buttons {
+display: flex !important;
+justify-content: center;
+gap: 10px;
+
 }
 
   .carousel-inner {
