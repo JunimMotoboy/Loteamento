@@ -123,4 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
     tamanho: "200mts",
     telefone: "5534996778018"
   });
+  criarCard({
+    id: 1,
+    imagens: ["./img/lote-1.webp", "./img/lote-2.webp", "./img/lote-3.jpg"],
+    titulo: "Long Town",
+    codigo: "TKBFF-022",
+    valor: "130.000,00",
+    tamanho: "200mts",
+    telefone: "5534996778018"
+  });
   
