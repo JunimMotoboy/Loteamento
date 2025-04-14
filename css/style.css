@@ -314,6 +314,51 @@ gap: 10px;
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+/* Estilo do carrossel principal */
+#carouselPrincipal {
+  margin: 20px;
+  
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner-principal img {
+  width: 100vw;
+  height: 450px;
+  object-fit: cover;
+}
+
+/* Título da seção */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: black;
+  margin: 40px 0 20px;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+  .carousel-inner-principal img {
+    height: 250px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 480px) {
+  .carousel-inner-principal img {
+    height: 180px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
 
 @media (max-width: 768px) {
   .hero-content h1 {
