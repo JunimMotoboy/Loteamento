@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loteamento Ibiza</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="./img/Logo caiçaras.png"
+      type="image/x-icon"
+    />
+  </head>
+
+  <header class="hero">
+    <nav class="nav-container">
+      <ul class="nav-links">
+        <li><a href="#cards-container">Lotes</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="dashboard.html" title="Painel Administrativo">
+          <i class="fas fa-cog"></i>
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <body>
+    <main>
+      <div class="img-hero">
+        <a href="#" class="logo">
+          <img src="./img/Logo caiçaras.png" alt="Logo Ibiza" />
+        </a>
+        <div class="hero-content">
+          <h1>O lugar perfeito para construir seus sonhos espera por você!</h1>
+        </div>
+      </div>
+      
+ <!-- Carrossel Principal Melhorado -->
+<section id="carouselPrincipal" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover" data-bs-touch="true">
+  <!-- Indicadores melhorados -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1 - Loteamento Premium"></button>
+    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="1" aria-label="Slide 2 - Localização Privilegiada"></button>
+    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="2" aria-label="Slide 3 - Investimento Seguro"></button>
+  </div>
+  
+  <div class="carousel-inner carousel-inner-principal">
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="img/carroussel-1.jpg" alt="Vista panorâmica do Loteamento Ibiza - Lotes premium com infraestrutura completa" loading="eager">
+      <div class="carousel-caption">
+        <h5>🏡 Loteamento Premium</h5>
+        <p>Conheça nossos lotes de alto padrão com toda infraestrutura necessária para realizar seus sonhos</p>
+      </div>
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <img class="d-block w-100" src="img/carroussel-2.jpg" alt="Localização estratégica do Loteamento Ibiza com fácil acesso" loading="lazy">
+      <div class="carousel-caption">
+        <h5>📍 Localização Privilegiada</h5>
+        <p>Área estratégica com fácil acesso, próximo a centros urbanos e com infraestrutura completa</p>
+      </div>
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <img class="d-block w-100" src="img/carroussel-3.jpg" alt="Investimento seguro no Loteamento Ibiza - Valorização garantida" loading="lazy">
+      <div class="carousel-caption">
+        <h5>💰 Investimento Seguro</h5>
+        <p>Garanta seu lote com as melhores condições de pagamento e valorização garantida</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Controles melhorados -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="prev" aria-label="Slide anterior">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="next" aria-label="Próximo slide">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Próximo</span>
+  </button>
+</section>
+
+<h2 class="section-title">Lotes disponíveis</h2>
+
+
+
+      
+      <div id="cards-container" class="d-flex flex-wrap gap-4 justify-content-center mt-5"></div>
+
+      <button class="btn-card">Ver Mais</button>
+    </main>
+    <footer id="contato" class="footer">
+      <div class="container">
+        <img class="img-foot" src="./img/GRUPO VECCHI.jpg" alt="" />
+        <p><strong>Grupo VECCHI</strong></p>
+        <p>📍 Endereço: Av. dos Loteamentos, 123 - Cidade, Estado</p>
+        <p>📞 Contato: (34) 99999-9999</p>
+        <p>✉️ E-mail: contato@ibizaloteamentos.com</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
