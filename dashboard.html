@@ -6,8 +6,425 @@
     <title>Dashboard - Loteamento Ibiza</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./img/Logo caiçaras.png" type="image/x-icon">
+    
+    <style>
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-header h4 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav li {
+            margin: 0.5rem 0;
+        }
+
+        .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: #fbbf24;
+        }
+
+        .sidebar-nav .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-left-color: #fbbf24;
+        }
+
+        .sidebar-nav .nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #64748b;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .user-info i {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dashboard Stats */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-card:nth-child(1) .stat-icon { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .stat-card:nth-child(2) .stat-icon { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .stat-card:nth-child(3) .stat-icon { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .stat-card:nth-child(4) .stat-icon { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .stat-info p {
+            color: #64748b;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            color: #1e293b;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-message h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .welcome-message p {
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-280px);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .dashboard-header {
+                padding: 1rem;
+            }
+            
+            .content-section {
+                padding: 1rem;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Sidebar -->
@@ -24,17 +441,8 @@
                 <li><a href="#lotes" class="nav-link" data-section="lotes">
                     <i class="fas fa-map-marked-alt"></i> Gerenciar Lotes
                 </a></li>
-                <li><a href="#carrossel" class="nav-link" data-section="carrossel">
-                    <i class="fas fa-images"></i> Carrossel
-                </a></li>
-                <li><a href="#preview" class="nav-link" data-section="preview">
-                    <i class="fas fa-eye"></i> Preview do Site
-                </a></li>
                 <li><a href="#configuracoes" class="nav-link" data-section="configuracoes">
                     <i class="fas fa-cog"></i> Configurações
-                </a></li>
-                <li><a href="#backup" class="nav-link" data-section="backup">
-                    <i class="fas fa-download"></i> Backup & Restore
                 </a></li>
                 <li><a href="index.html" class="nav-link" target="_blank">
                     <i class="fas fa-external-link-alt"></i> Ver Site
@@ -53,20 +461,28 @@
             <h1 id="pageTitle">Dashboard</h1>
             <div class="header-actions">
                 <span class="user-info">
-                    <i class="fas fa-user-circle"></i> Administrador
+                    <i class="fas fa-user-circle"></i> <span id="currentUser">Administrador</span>
                 </span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
             </div>
         </header>
 
         <!-- Dashboard Section -->
         <section id="dashboard-section" class="content-section active">
+            <div class="welcome-message">
+                <h3>Bem-vindo ao Dashboard, <span id="welcomeUser">Vitor</span>!</h3>
+                <p>Gerencie seu loteamento de forma fácil e eficiente</p>
+            </div>
+            
             <div class="dashboard-stats">
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalLotes">0</h3>
+                        <h3 id="totalLotes">2</h3>
                         <p>Total de Lotes</p>
                     </div>
                 </div>
@@ -75,7 +491,7 @@
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="lotesDisponiveis">0</h3>
+                        <h3 id="lotesDisponiveis">2</h3>
                         <p>Lotes Disponíveis</p>
                     </div>
                 </div>
@@ -84,7 +500,7 @@
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="valorTotal">R$ 0</h3>
+                        <h3 id="valorTotal">R$ 280.000</h3>
                         <p>Valor Total</p>
                     </div>
                 </div>
@@ -99,23 +515,51 @@
                 </div>
             </div>
 
-            <div class="dashboard-charts">
-                <div class="chart-card">
-                    <h4>Lotes por Status</h4>
-                    <canvas id="statusChart"></canvas>
-                </div>
-                <div class="recent-activity">
-                    <h4>Atividade Recente</h4>
-                    <div class="activity-list" id="activityList">
-                        <div class="activity-item">
-                            <i class="fas fa-plus-circle text-success"></i>
-                            <span>Novo lote adicionado: Long Town</span>
-                            <small>2 horas atrás</small>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Lotes Cadastrados</h5>
                         </div>
-                        <div class="activity-item">
-                            <i class="fas fa-edit text-warning"></i>
-                            <span>Lote editado: Garden Ville</span>
-                            <small>5 horas atrás</small>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Long Town</h6>
+                                        <p class="mb-1">Código: TKBFF-022 | Tamanho: 200m²</p>
+                                        <small>R$ 130.000,00</small>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Disponível</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Garden Ville</h6>
+                                        <p class="mb-1">Código: TKBFF-023 | Tamanho: 250m²</p>
+                                        <small>R$ 150.000,00</small>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Disponível</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Ações Rápidas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" onclick="showSection('lotes')">
+                                    <i class="fas fa-plus"></i> Adicionar Lote
+                                </button>
+                                <button class="btn btn-success" onclick="showSection('configuracoes')">
+                                    <i class="fas fa-cog"></i> Configurações
+                                </button>
+                                <a href="index.html" target="_blank" class="btn btn-info">
+                                    <i class="fas fa-external-link-alt"></i> Ver Site
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,58 +570,58 @@
         <section id="lotes-section" class="content-section">
             <div class="section-header">
                 <h2>Gerenciar Lotes</h2>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loteModal" onclick="openLoteModal()">
+                <button class="btn btn-primary" onclick="alert('Funcionalidade em desenvolvimento!')">
                     <i class="fas fa-plus"></i> Adicionar Lote
                 </button>
             </div>
 
-            <div class="lotes-grid" id="lotesGrid">
-                <!-- Lotes serão carregados aqui dinamicamente -->
-            </div>
-        </section>
-
-        <!-- Carrossel Management Section -->
-        <section id="carrossel-section" class="content-section">
-            <div class="section-header">
-                <h2>Gerenciar Carrossel</h2>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carrosselModal">
-                    <i class="fas fa-plus"></i> Adicionar Slide
-                </button>
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <strong>Funcionalidade em Desenvolvimento:</strong> Em breve você poderá adicionar, editar e remover lotes diretamente pelo dashboard.
             </div>
 
-            <div class="carrossel-items" id="carrosselItems">
-                <!-- Slides do carrossel serão carregados aqui -->
-            </div>
-        </section>
-
-        <!-- Preview Section -->
-        <section id="preview-section" class="content-section">
-            <div class="section-header">
-                <h2>Preview do Site</h2>
-                <div class="preview-controls">
-                    <button class="btn btn-primary" onclick="refreshPreview()">
-                        <i class="fas fa-sync-alt"></i> Atualizar Preview
-                    </button>
-                    <button class="btn btn-success" onclick="openSiteInNewTab()">
-                        <i class="fas fa-external-link-alt"></i> Abrir Site
-                    </button>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Long Town</h5>
+                            <p class="card-text">
+                                <strong>Código:</strong> TKBFF-022<br>
+                                <strong>Valor:</strong> R$ 130.000,00<br>
+                                <strong>Tamanho:</strong> 200m²<br>
+                                <strong>Status:</strong> <span class="badge bg-success">Disponível</span>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-warning" onclick="alert('Funcionalidade em desenvolvimento!')">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="alert('Funcionalidade em desenvolvimento!')">
+                                    <i class="fas fa-trash"></i> Remover
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="preview-container">
-                <div class="preview-device-selector">
-                    <button class="btn btn-outline-primary device-btn active" data-device="desktop">
-                        <i class="fas fa-desktop"></i> Desktop
-                    </button>
-                    <button class="btn btn-outline-primary device-btn" data-device="tablet">
-                        <i class="fas fa-tablet-alt"></i> Tablet
-                    </button>
-                    <button class="btn btn-outline-primary device-btn" data-device="mobile">
-                        <i class="fas fa-mobile-alt"></i> Mobile
-                    </button>
-                </div>
-                <div class="preview-frame-container">
-                    <iframe id="sitePreview" src="index.html" class="preview-frame desktop"></iframe>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Garden Ville</h5>
+                            <p class="card-text">
+                                <strong>Código:</strong> TKBFF-023<br>
+                                <strong>Valor:</strong> R$ 150.000,00<br>
+                                <strong>Tamanho:</strong> 250m²<br>
+                                <strong>Status:</strong> <span class="badge bg-success">Disponível</span>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-warning" onclick="alert('Funcionalidade em desenvolvimento!')">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="alert('Funcionalidade em desenvolvimento!')">
+                                    <i class="fas fa-trash"></i> Remover
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -186,196 +630,191 @@
         <section id="configuracoes-section" class="content-section">
             <div class="section-header">
                 <h2>Configurações do Site</h2>
-                <button class="btn btn-info" onclick="aplicarConfiguracoes()">
-                    <i class="fas fa-magic"></i> Aplicar & Visualizar
-                </button>
             </div>
 
-            <div class="config-form">
-                <div class="config-group">
-                    <h4>Informações de Contato</h4>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informações de Contato</h5>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" value="(34) 99999-9999">
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" value="(34) 99999-9999">
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" value="contato@ibizaloteamentos.com">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" value="contato@ibizaloteamentos.com">
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-3">
+                    <div class="mb-3">
                         <label for="endereco" class="form-label">Endereço</label>
                         <input type="text" class="form-control" id="endereco" value="Av. dos Loteamentos, 123 - Cidade, Estado">
                     </div>
-                </div>
-
-                <div class="config-group">
-                    <h4>Configurações Gerais</h4>
+                    
+                    <hr>
+                    
+                    <h5 class="card-title">Configurações Gerais</h5>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="tituloSite" class="form-label">Título do Site</label>
-                            <input type="text" class="form-control" id="tituloSite" value="Loteamento Ibiza">
+                            <div class="mb-3">
+                                <label for="tituloSite" class="form-label">Título do Site</label>
+                                <input type="text" class="form-control" id="tituloSite" value="Loteamento Ibiza">
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="subtitulo" class="form-label">Subtítulo</label>
-                            <input type="text" class="form-control" id="subtitulo" value="O lugar perfeito para construir seus sonhos espera por você!">
+                            <div class="mb-3">
+                                <label for="subtitulo" class="form-label">Subtítulo</label>
+                                <input type="text" class="form-control" id="subtitulo" value="O lugar perfeito para construir seus sonhos espera por você!">
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <button class="btn btn-success mt-3" onclick="salvarConfiguracoes()">
-                    <i class="fas fa-save"></i> Salvar Configurações
-                </button>
-            </div>
-        </section>
-
-        <!-- Backup & Restore Section -->
-        <section id="backup-section" class="content-section">
-            <div class="section-header">
-                <h2>Backup & Restore</h2>
-            </div>
-
-            <div class="backup-container">
-                <div class="backup-card">
-                    <div class="backup-icon">
-                        <i class="fas fa-download"></i>
-                    </div>
-                    <div class="backup-content">
-                        <h4>Exportar Dados</h4>
-                        <p>Faça backup de todos os lotes, configurações e slides do carrossel</p>
-                        <button class="btn btn-primary" onclick="exportarDados()">
-                            <i class="fas fa-download"></i> Exportar Backup
-                        </button>
-                    </div>
-                </div>
-
-                <div class="backup-card">
-                    <div class="backup-icon">
-                        <i class="fas fa-upload"></i>
-                    </div>
-                    <div class="backup-content">
-                        <h4>Importar Dados</h4>
-                        <p>Restaure dados de um arquivo de backup anterior</p>
-                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importarDados(event)">
-                        <button class="btn btn-warning" onclick="document.getElementById('importFile').click()">
-                            <i class="fas fa-upload"></i> Importar Backup
-                        </button>
-                    </div>
-                </div>
-
-                <div class="backup-card">
-                    <div class="backup-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <div class="backup-content">
-                        <h4>Sincronizar Site</h4>
-                        <p>Force a sincronização dos dados com o site principal</p>
-                        <button class="btn btn-info" onclick="sincronizarSite()">
-                            <i class="fas fa-sync-alt"></i> Sincronizar Agora
-                        </button>
-                    </div>
-                </div>
-
-                <div class="backup-card danger">
-                    <div class="backup-icon">
-                        <i class="fas fa-trash-alt"></i>
-                    </div>
-                    <div class="backup-content">
-                        <h4>Reset Completo</h4>
-                        <p>Apagar todos os dados e restaurar configurações padrão</p>
-                        <button class="btn btn-danger" onclick="resetCompleto()">
-                            <i class="fas fa-exclamation-triangle"></i> Reset Total
-                        </button>
-                    </div>
+                    
+                    <button class="btn btn-success" onclick="salvarConfiguracoes()">
+                        <i class="fas fa-save"></i> Salvar Configurações
+                    </button>
                 </div>
             </div>
         </section>
-    </div>
-
-    <!-- Modal para Lotes -->
-    <div class="modal fade" id="loteModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loteModalTitle">Adicionar Novo Lote</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loteForm">
-                        <input type="hidden" id="loteId">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="loteTitulo" class="form-label">Título do Lote</label>
-                                <input type="text" class="form-control" id="loteTitulo" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="loteCodigo" class="form-label">Código</label>
-                                <input type="text" class="form-control" id="loteCodigo" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label for="loteValor" class="form-label">Valor (R$)</label>
-                                <input type="text" class="form-control" id="loteValor" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="loteTamanho" class="form-label">Tamanho</label>
-                                <input type="text" class="form-control" id="loteTamanho" required>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <label for="loteImagens" class="form-label">URLs das Imagens (separadas por vírgula)</label>
-                            <textarea class="form-control" id="loteImagens" rows="3" placeholder="./img/lote-1.webp, ./img/lote-2.webp, ./img/lote-3.jpg"></textarea>
-                        </div>
-                        <div class="mt-3">
-                            <label for="loteDescricao" class="form-label">Descrição</label>
-                            <textarea class="form-control" id="loteDescricao" rows="3"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="salvarLote()">Salvar Lote</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Carrossel -->
-    <div class="modal fade" id="carrosselModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Adicionar Slide ao Carrossel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="carrosselForm">
-                        <div class="mb-3">
-                            <label for="slideImagem" class="form-label">URL da Imagem</label>
-                            <input type="text" class="form-control" id="slideImagem" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="slideTitulo" class="form-label">Título</label>
-                            <input type="text" class="form-control" id="slideTitulo" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="slideDescricao" class="form-label">Descrição</label>
-                            <textarea class="form-control" id="slideDescricao" rows="3" required></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="salvarSlide()">Salvar Slide</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./js/dashboard.js"></script>
+    <script>
+        // Verificar autenticação ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            initDashboard();
+        });
+
+        function checkAuth() {
+            const isAuthenticated = localStorage.getItem('dashboardAuth');
+            const loginTime = localStorage.getItem('dashboardLoginTime');
+            const currentTime = new Date().getTime();
+            
+            if (!isAuthenticated || isAuthenticated !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Verificar se a sessão expirou (24 horas)
+            if (loginTime) {
+                const hoursPassed = (currentTime - loginTime) / (1000 * 60 * 60);
+                if (hoursPassed > 24) {
+                    logout();
+                    return;
+                }
+            }
+            
+            // Atualizar nome do usuário
+            const username = localStorage.getItem('dashboardUser') || 'Administrador';
+            document.getElementById('currentUser').textContent = username;
+            document.getElementById('welcomeUser').textContent = username.charAt(0).toUpperCase() + username.slice(1);
+        }
+
+        function logout() {
+            localStorage.removeItem('dashboardAuth');
+            localStorage.removeItem('dashboardUser');
+            localStorage.removeItem('dashboardLoginTime');
+            window.location.href = 'login.html';
+        }
+
+        function initDashboard() {
+            // Sidebar toggle
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            sidebarToggle.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.toggle('show');
+                } else {
+                    sidebar.classList.toggle('collapsed');
+                    mainContent.classList.toggle('expanded');
+                }
+            });
+
+            // Navigation
+            const navLinks = document.querySelectorAll('.nav-link[data-section]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                    
+                    // Update active nav
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update page title
+                    const titles = {
+                        'dashboard': 'Dashboard',
+                        'lotes': 'Gerenciar Lotes',
+                        'configuracoes': 'Configurações'
+                    };
+                    document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
+                    
+                    // Close sidebar on mobile
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            });
+
+            // Responsive sidebar
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+
+        function salvarConfiguracoes() {
+            // Simular salvamento
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Salvo!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 1000);
+            }, 1500);
+        }
+
+        // Atualizar estatísticas em tempo real (simulado)
+        function updateStats() {
+            // Simular atualizações das estatísticas
+            const stats = {
+                totalLotes: 2,
+                lotesDisponiveis: 2,
+                valorTotal: 'R$ 280.000'
+            };
+            
+            document.getElementById('totalLotes').textContent = stats.totalLotes;
+            document.getElementById('lotesDisponiveis').textContent = stats.lotesDisponiveis;
+            document.getElementById('valorTotal').textContent = stats.valorTotal;
+        }
+
+        // Atualizar stats a cada 30 segundos
+        setInterval(updateStats, 30000);
+    </script>
 </body>
 </html>
