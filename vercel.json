@@ -8,12 +8,44 @@
   ],
   "routes": [
     {
+      "src": "/login.html",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/dashboard.html",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/js/$1"
+    },
+    {
+      "src": "/img/(.*)",
+      "dest": "/img/$1"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/server-simple.js"
     },
     {
       "src": "/dashboard",
-      "dest": "/server-simple.js"
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
