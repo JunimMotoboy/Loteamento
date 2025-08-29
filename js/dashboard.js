@@ -122,9 +122,26 @@ function setupEventListeners() {
                 'dashboard': 'Dashboard',
                 'lotes': 'Gerenciar Lotes',
                 'carrossel': 'Gerenciar Carrossel',
-                'configuracoes': 'Configurações'
+                'preview': 'Preview do Site',
+                'configuracoes': 'Configurações',
+                'backup': 'Backup & Restore'
             };
             document.getElementById('pageTitle').textContent = titles[section];
+        });
+    });
+
+    // Preview device selector
+    const deviceButtons = document.querySelectorAll('.device-btn');
+    deviceButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            deviceButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const device = this.getAttribute('data-device');
+            const iframe = document.getElementById('sitePreview');
+            if (iframe) {
+                iframe.className = `preview-frame ${device}`;
+            }
         });
     });
 
@@ -544,3 +561,225 @@ window.addEventListener('resize', handleMobileMenu);
 
 // Inicializar menu mobile
 handleMobileMenu();
+
+// ===== NOVAS FUNCIONALIDADES =====
+
+// Funções do Preview
+function refreshPreview() {
+    const iframe = document.getElementById('sitePreview');
+    if (iframe) {
+        // Força a sincronização dos dados antes de atualizar
+        updateSiteData();
+        
+        // Recarrega o iframe
+        iframe.src = iframe.src;
+        
+        showAlert('Preview atualizado com sucesso!', 'success');
+    }
+}
+
+function openSiteInNewTab() {
+    // Força a sincronização dos dados antes de abrir
+    updateSiteData();
+    
+    // Abre o site em nova aba
+    window.open('index.html', '_blank');
+}
+
+// Função para aplicar configurações e visualizar
+function aplicarConfiguracoes() {
+    // Salva as configurações
+    salvarConfiguracoes();
+    
+    // Atualiza os dados do site
+    updateSiteData();
+    
+    // Atualiza o preview
+    setTimeout(() => {
+        refreshPreview();
+    }, 500);
+    
+    showAlert('Configurações aplicadas! Verifique o preview.', 'success');
+}
+
+// Funções de Backup e Restore
+function sincronizarSite() {
+    // Força a sincronização completa
+    updateSiteData();
+    
+    // Simula um processo de sincronização
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sincronizando...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        showAlert('Site sincronizado com sucesso!', 'success');
+    }, 2000);
+}
+
+function resetCompleto() {
+    if (confirm('⚠️ ATENÇÃO: Esta ação irá apagar TODOS os dados (lotes, configurações, slides) e não pode ser desfeita. Tem certeza que deseja continuar?')) {
+        if (confirm('Última confirmação: Todos os dados serão perdidos permanentemente. Continuar?')) {
+            // Limpar localStorage
+            localStorage.removeItem('ibiza_lotes');
+            localStorage.removeItem('ibiza_slides');
+            localStorage.removeItem('ibiza_config');
+            localStorage.removeItem('ibiza_site_data');
+            
+            // Reinicializar com dados padrão
+            initializeDashboard();
+            
+            // Atualizar interface
+            renderLotes();
+            renderCarrosselSlides();
+            loadConfiguracoes();
+            updateStats();
+            updateSiteData();
+            
+            showAlert('Reset completo realizado! Dados padrão restaurados.', 'warning');
+        }
+    }
+}
+
+// Função melhorada de notificação
+function showNotification(message, type = 'success') {
+    // Remove notificação existente se houver
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Cria nova notificação
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animar entrada
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Remover após 4 segundos
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 4000);
+}
+
+// Função para adicionar atividade recente
+function addRecentActivity(action, description) {
+    const activityList = document.getElementById('activityList');
+    if (!activityList) return;
+    
+    const activityItem = document.createElement('div');
+    activityItem.className = 'activity-item';
+    
+    const iconClass = {
+        'add': 'fas fa-plus-circle text-success',
+        'edit': 'fas fa-edit text-warning',
+        'delete': 'fas fa-trash text-danger',
+        'sync': 'fas fa-sync-alt text-info'
+    }[action] || 'fas fa-info-circle text-primary';
+    
+    activityItem.innerHTML = `
+        <i class="${iconClass}"></i>
+        <span>${description}</span>
+        <small>Agora mesmo</small>
+    `;
+    
+    // Adicionar no início da lista
+    activityList.insertBefore(activityItem, activityList.firstChild);
+    
+    // Manter apenas os últimos 5 itens
+    while (activityList.children.length > 5) {
+        activityList.removeChild(activityList.lastChild);
+    }
+}
+
+// Sobrescrever funções existentes para adicionar atividades
+const originalSalvarLote = salvarLote;
+salvarLote = function() {
+    const isEdit = dashboardState.editingLoteId;
+    const titulo = document.getElementById('loteTitulo').value;
+    
+    originalSalvarLote();
+    
+    if (isEdit) {
+        addRecentActivity('edit', `Lote editado: ${titulo}`);
+    } else {
+        addRecentActivity('add', `Novo lote adicionado: ${titulo}`);
+    }
+};
+
+const originalExcluirLote = excluirLote;
+excluirLote = function(loteId) {
+    const lote = dashboardState.lotes.find(l => l.id === loteId);
+    const titulo = lote ? lote.titulo : 'Lote';
+    
+    originalExcluirLote(loteId);
+    addRecentActivity('delete', `Lote excluído: ${titulo}`);
+};
+
+// Função para melhorar a experiência do usuário
+function enhanceUserExperience() {
+    // Adicionar tooltips aos botões
+    const buttons = document.querySelectorAll('[title]');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            // Implementar tooltip personalizado se necessário
+        });
+    });
+    
+    // Adicionar confirmação para ações destrutivas
+    const dangerButtons = document.querySelectorAll('.btn-danger');
+    dangerButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            if (!confirm('Tem certeza que deseja realizar esta ação?')) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+    });
+}
+
+// Inicializar melhorias de UX
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(enhanceUserExperience, 1000);
+});
+
+// Função para monitorar mudanças e auto-salvar
+let autoSaveTimeout;
+function setupAutoSave() {
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                // Auto-salvar configurações se estiver na seção de configurações
+                const activeSection = document.querySelector('.content-section.active');
+                if (activeSection && activeSection.id === 'configuracoes-section') {
+                    salvarConfiguracoes();
+                    showNotification('Configurações salvas automaticamente', 'success');
+                }
+            }, 3000); // Auto-salva após 3 segundos de inatividade
+        });
+    });
+}
+
+// Inicializar auto-save
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(setupAutoSave, 2000);
+});

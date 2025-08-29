@@ -27,10 +27,16 @@
                 <li><a href="#carrossel" class="nav-link" data-section="carrossel">
                     <i class="fas fa-images"></i> Carrossel
                 </a></li>
+                <li><a href="#preview" class="nav-link" data-section="preview">
+                    <i class="fas fa-eye"></i> Preview do Site
+                </a></li>
                 <li><a href="#configuracoes" class="nav-link" data-section="configuracoes">
                     <i class="fas fa-cog"></i> Configurações
                 </a></li>
-                <li><a href="index.html" class="nav-link">
+                <li><a href="#backup" class="nav-link" data-section="backup">
+                    <i class="fas fa-download"></i> Backup & Restore
+                </a></li>
+                <li><a href="index.html" class="nav-link" target="_blank">
                     <i class="fas fa-external-link-alt"></i> Ver Site
                 </a></li>
             </ul>
@@ -144,10 +150,45 @@
             </div>
         </section>
 
+        <!-- Preview Section -->
+        <section id="preview-section" class="content-section">
+            <div class="section-header">
+                <h2>Preview do Site</h2>
+                <div class="preview-controls">
+                    <button class="btn btn-primary" onclick="refreshPreview()">
+                        <i class="fas fa-sync-alt"></i> Atualizar Preview
+                    </button>
+                    <button class="btn btn-success" onclick="openSiteInNewTab()">
+                        <i class="fas fa-external-link-alt"></i> Abrir Site
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-device-selector">
+                    <button class="btn btn-outline-primary device-btn active" data-device="desktop">
+                        <i class="fas fa-desktop"></i> Desktop
+                    </button>
+                    <button class="btn btn-outline-primary device-btn" data-device="tablet">
+                        <i class="fas fa-tablet-alt"></i> Tablet
+                    </button>
+                    <button class="btn btn-outline-primary device-btn" data-device="mobile">
+                        <i class="fas fa-mobile-alt"></i> Mobile
+                    </button>
+                </div>
+                <div class="preview-frame-container">
+                    <iframe id="sitePreview" src="index.html" class="preview-frame desktop"></iframe>
+                </div>
+            </div>
+        </section>
+
         <!-- Configurações Section -->
         <section id="configuracoes-section" class="content-section">
             <div class="section-header">
                 <h2>Configurações do Site</h2>
+                <button class="btn btn-info" onclick="aplicarConfiguracoes()">
+                    <i class="fas fa-magic"></i> Aplicar & Visualizar
+                </button>
             </div>
 
             <div class="config-form">
@@ -186,6 +227,68 @@
                 <button class="btn btn-success mt-3" onclick="salvarConfiguracoes()">
                     <i class="fas fa-save"></i> Salvar Configurações
                 </button>
+            </div>
+        </section>
+
+        <!-- Backup & Restore Section -->
+        <section id="backup-section" class="content-section">
+            <div class="section-header">
+                <h2>Backup & Restore</h2>
+            </div>
+
+            <div class="backup-container">
+                <div class="backup-card">
+                    <div class="backup-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="backup-content">
+                        <h4>Exportar Dados</h4>
+                        <p>Faça backup de todos os lotes, configurações e slides do carrossel</p>
+                        <button class="btn btn-primary" onclick="exportarDados()">
+                            <i class="fas fa-download"></i> Exportar Backup
+                        </button>
+                    </div>
+                </div>
+
+                <div class="backup-card">
+                    <div class="backup-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <div class="backup-content">
+                        <h4>Importar Dados</h4>
+                        <p>Restaure dados de um arquivo de backup anterior</p>
+                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importarDados(event)">
+                        <button class="btn btn-warning" onclick="document.getElementById('importFile').click()">
+                            <i class="fas fa-upload"></i> Importar Backup
+                        </button>
+                    </div>
+                </div>
+
+                <div class="backup-card">
+                    <div class="backup-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="backup-content">
+                        <h4>Sincronizar Site</h4>
+                        <p>Force a sincronização dos dados com o site principal</p>
+                        <button class="btn btn-info" onclick="sincronizarSite()">
+                            <i class="fas fa-sync-alt"></i> Sincronizar Agora
+                        </button>
+                    </div>
+                </div>
+
+                <div class="backup-card danger">
+                    <div class="backup-icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div class="backup-content">
+                        <h4>Reset Completo</h4>
+                        <p>Apagar todos os dados e restaurar configurações padrão</p>
+                        <button class="btn btn-danger" onclick="resetCompleto()">
+                            <i class="fas fa-exclamation-triangle"></i> Reset Total
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

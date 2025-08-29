@@ -291,7 +291,7 @@ function criarCard({ id, imagens, titulo, codigo, valor, tamanho, telefone }) {
   `).join("");
 
   const cardHTML = `
-    <div class="card" style="width: 18rem">
+    <div class="card">
       <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           ${imagensCarousel}
