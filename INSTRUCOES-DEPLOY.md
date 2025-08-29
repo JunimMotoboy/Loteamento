@@ -99,4 +99,62 @@ O problema era que o Vercel não conseguia iniciar o servidor porque:
 - Estava tentando executar `server.js` (que não existe)
 - Em vez de `server-simple.js` (que existe)
 
-**🚀 FAÇA O COMMIT AGORA! DESTA VEZ VAI FUNCIONAR! 🚀**
+## 🎯 ATUALIZAÇÃO - SITE CARREGANDO MAS SEM CSS
+
+Ótimo progresso! O site agora carrega (não redireciona mais), mas o CSS não está sendo aplicado. Isso significa que o servidor está funcionando, mas os arquivos estáticos precisam de configuração específica.
+
+### 🔧 Solução Final Aplicada:
+
+Adicionei headers específicos para arquivos estáticos no `vercel.json`:
+
+```json
+{
+  "routes": [
+    {
+      "src": "/css/(.*)",
+      "headers": {
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/js/(.*)",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/img/(.*)",
+      "headers": {
+        "Content-Type": "image/*"
+      }
+    }
+  ]
+}
+```
+
+### 🚀 FAÇA O COMMIT DESTA CORREÇÃO:
+
+```bash
+git add .
+git commit -m "fix: adicionar headers para arquivos estáticos CSS/JS/IMG"
+git push origin main
+```
+
+### 🔄 Se Ainda Não Funcionar:
+
+**Opção 1 - Configuração Alternativa:**
+```bash
+# Renomear para usar configuração alternativa
+mv vercel.json vercel-backup.json
+mv vercel-final.json vercel.json
+git add .
+git commit -m "fix: usar configuração alternativa do vercel"
+git push origin main
+```
+
+**Opção 2 - Force Deploy:**
+```bash
+vercel --prod --force
+```
+
+**🚀 AGORA SIM DEVE FUNCIONAR COM CSS! 🚀**

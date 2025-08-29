@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/css/(.*)",
+      "headers": {
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/js/(.*)",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/img/(.*)",
+      "headers": {
+        "Content-Type": "image/*"
+      }
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server-simple.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server-simple.js"
+    }
+  ]
+}
