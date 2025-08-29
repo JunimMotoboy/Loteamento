@@ -314,49 +314,317 @@ gap: 10px;
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-/* Estilo do carrossel principal */
+/* Estilo do carrossel principal melhorado */
 #carouselPrincipal {
-  margin: 20px;
-  
-  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 1200px;
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+}
+
+#carouselPrincipal:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.carousel-inner-principal {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
 }
 
 .carousel-inner-principal img {
-  width: 100vw;
-  height: 450px;
+  width: 100%;
+  height: 500px;
   object-fit: cover;
+  display: block;
+  transition: none;
 }
 
-/* Título da seção */
+.carousel-item {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+/* Efeito de zoom nas imagens */
+.carousel-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Melhorias nos controles do carrossel */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+#carouselPrincipal:hover .carousel-control-prev,
+#carouselPrincipal:hover .carousel-control-next {
+  opacity: 1;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Indicadores melhorados */
+.carousel-indicators {
+  bottom: 20px;
+  margin-bottom: 0;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background: #fff;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Captions melhoradas com animações */
+.carousel-caption {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: left;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.carousel-item.active .carousel-caption {
+  transform: translateY(0);
+  opacity: 1;
+  animation: slideInUp 0.8s ease-out;
+}
+
+.carousel-caption h5 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.carousel-caption p {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Barra de progresso do carrossel */
+.carousel-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  z-index: 10;
+}
+
+.carousel-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+}
+
+/* Animações personalizadas */
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Título da seção melhorado */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
-  color: black;
-  margin: 40px 0 20px;
+  font-size: 2.8rem;
+  color: #333;
+  margin: 50px 0 30px;
+  font-weight: 700;
+  position: relative;
+  font-family: 'Oswald', sans-serif;
 }
 
-/* Responsividade para tablets */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border-radius: 2px;
+}
+
+/* Responsividade melhorada */
 @media (max-width: 768px) {
+  #carouselPrincipal {
+    margin: 15px;
+    border-radius: 10px;
+    height: 300px;
+  }
+
+  .carousel-inner-principal {
+    height: 300px;
+  }
+
   .carousel-inner-principal img {
-    height: 250px;
+    height: 300px;
+  }
+
+  .carousel-item {
+    height: 300px;
+  }
+
+  .carousel-caption {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    padding: 15px;
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.4rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 45px;
+    height: 45px;
+  }
+
+  .carousel-control-prev {
+    left: 10px;
+  }
+
+  .carousel-control-next {
+    right: 10px;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    margin: 30px 0 20px;
   }
 }
 
-/* Responsividade para celulares */
 @media (max-width: 480px) {
+  #carouselPrincipal {
+    height: 220px;
+  }
+
+  .carousel-inner-principal {
+    height: 220px;
+  }
+
   .carousel-inner-principal img {
-    height: 180px;
+    height: 220px;
+  }
+
+  .carousel-item {
+    height: 220px;
+  }
+
+  .carousel-caption {
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    padding: 12px;
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.2rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.8rem;
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Efeitos de loading suave */
+.carousel-item img {
+  opacity: 0;
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.carousel-item.active img {
+  animation-delay: 0.2s;
 }
 
 
