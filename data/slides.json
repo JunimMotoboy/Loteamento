@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "imagem": "img/carroussel-1.jpg",
+    "titulo": "🏡 Loteamento Premium",
+    "descricao": "Conheça nossos lotes de alto padrão com toda infraestrutura necessária para realizar seus sonhos",
+    "ordem": 1,
+    "ativo": 1
+  },
+  {
+    "id": 2,
+    "imagem": "img/carroussel-2.jpg",
+    "titulo": "📍 Localização Privilegiada",
+    "descricao": "Área estratégica com fácil acesso, próximo a centros urbanos e com infraestrutura completa",
+    "ordem": 2,
+    "ativo": 1
+  },
+  {
+    "id": 3,
+    "imagem": "img/carroussel-3.jpg",
+    "titulo": "💰 Investimento Seguro",
+    "descricao": "Garanta seu lote com as melhores condições de pagamento e valorização garantida",
+    "ordem": 3,
+    "ativo": 1
+  }
+]

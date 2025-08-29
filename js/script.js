@@ -350,17 +350,25 @@ function criarCard({ id, imagens, titulo, codigo, valor, tamanho, telefone }) {
   container.insertAdjacentHTML("beforeend", cardHTML);
 }
 
-// Carregar dados do dashboard ou usar dados padrão
-function loadSiteData() {
-  const savedData = localStorage.getItem('ibiza_site_data');
-  if (savedData) {
-    const data = JSON.parse(savedData);
-    return data.lotes || getDefaultCards();
+// Carregar dados da API
+async function loadSiteData() {
+  try {
+    const response = await fetch('/api/site-data');
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        return data.data.lotes || getDefaultCards();
+      }
+    }
+    console.warn('Erro ao carregar dados da API, usando dados padrão');
+    return getDefaultCards();
+  } catch (error) {
+    console.error('Erro ao conectar com a API:', error);
+    return getDefaultCards();
   }
-  return getDefaultCards();
 }
 
-// Dados padrão caso não haja dados do dashboard
+// Dados padrão caso não haja dados da API
 function getDefaultCards() {
   return [
     {
@@ -387,7 +395,7 @@ function getDefaultCards() {
 }
 
 // Array com todos os cards (carregado dinamicamente)
-let allCards = loadSiteData();
+let allCards = [];
 
 // Elementos e estados
 const btnCard = document.querySelector('.btn-card');
@@ -399,82 +407,115 @@ function limparCards() {
 }
 
 // Função para carregar os cards iniciais
-function loadInitialCards() {
-  limparCards();
-  allCards.slice(0, 6).forEach(card => criarCard(card));
-  btnCard.textContent = "Ver Mais";
+async function loadInitialCards() {
+  try {
+    allCards = await loadSiteData();
+    limparCards();
+    allCards.slice(0, 6).forEach(card => criarCard(card));
+    if (btnCard) btnCard.textContent = "Ver Mais";
+  } catch (error) {
+    console.error('Erro ao carregar cards iniciais:', error);
+  }
 }
 
 // Função para carregar todos os cards
 function loadAllCards() {
   limparCards();
   allCards.forEach(card => criarCard(card));
-  btnCard.textContent = "Ver Menos";
+  if (btnCard) btnCard.textContent = "Ver Menos";
 }
 
 // Evento do botão
-btnCard.addEventListener('click', () => {
-  mostrandoTodos = !mostrandoTodos;
-  
-  if (mostrandoTodos) {
-    loadAllCards();
-  } else {
-    loadInitialCards();
-  }
-});
+if (btnCard) {
+  btnCard.addEventListener('click', () => {
+    mostrandoTodos = !mostrandoTodos;
+    
+    if (mostrandoTodos) {
+      loadAllCards();
+    } else {
+      loadInitialCards();
+    }
+  });
+}
 
-// Função para recarregar dados do dashboard
-function reloadSiteData() {
-  allCards = loadSiteData();
-  if (mostrandoTodos) {
-    loadAllCards();
-  } else {
-    loadInitialCards();
+// Função para recarregar dados da API
+async function reloadSiteData() {
+  try {
+    allCards = await loadSiteData();
+    if (mostrandoTodos) {
+      loadAllCards();
+    } else {
+      loadInitialCards();
+    }
+  } catch (error) {
+    console.error('Erro ao recarregar dados:', error);
   }
 }
 
-// Verificar atualizações dos dados a cada 5 segundos
-setInterval(() => {
-  const currentData = JSON.stringify(allCards);
-  const newData = JSON.stringify(loadSiteData());
-  
-  if (currentData !== newData) {
-    reloadSiteData();
+// Verificar atualizações dos dados a cada 30 segundos (reduzido para não sobrecarregar)
+setInterval(async () => {
+  try {
+    const currentData = JSON.stringify(allCards);
+    const newCards = await loadSiteData();
+    const newData = JSON.stringify(newCards);
+    
+    if (currentData !== newData) {
+      allCards = newCards;
+      if (mostrandoTodos) {
+        loadAllCards();
+      } else {
+        loadInitialCards();
+      }
+    }
+  } catch (error) {
+    console.error('Erro ao verificar atualizações:', error);
   }
-}, 5000);
+}, 30000);
 
 // Carregar inicialmente os primeiros cards
 loadInitialCards();
 
 // Função para atualizar configurações do site
-function updateSiteConfig() {
-  const savedData = localStorage.getItem('ibiza_site_data');
-  if (savedData) {
-    const data = JSON.parse(savedData);
-    if (data.configuracoes) {
-      // Atualizar título se existir
-      const titleElement = document.querySelector('.hero-content h1');
-      if (titleElement && data.configuracoes.subtitulo) {
-        titleElement.textContent = data.configuracoes.subtitulo;
-      }
-      
-      // Atualizar informações de contato no footer
-      const footerContainer = document.querySelector('.footer .container');
-      if (footerContainer && data.configuracoes.telefone) {
-        const phoneElement = footerContainer.querySelector('p:nth-child(3)');
-        const emailElement = footerContainer.querySelector('p:nth-child(4)');
-        const addressElement = footerContainer.querySelector('p:nth-child(2)');
+async function updateSiteConfig() {
+  try {
+    const response = await fetch('/api/configuracoes/public');
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success && data.data) {
+        const configuracoes = data.data;
         
-        if (phoneElement) phoneElement.innerHTML = `📞 Contato: ${data.configuracoes.telefone}`;
-        if (emailElement) emailElement.innerHTML = `✉️ E-mail: ${data.configuracoes.email}`;
-        if (addressElement) addressElement.innerHTML = `📍 Endereço: ${data.configuracoes.endereco}`;
+        // Atualizar título se existir
+        const titleElement = document.querySelector('.hero-content h1');
+        if (titleElement && configuracoes.subtitulo) {
+          titleElement.textContent = configuracoes.subtitulo;
+        }
+        
+        // Atualizar informações de contato no footer
+        const footerContainer = document.querySelector('.footer .container');
+        if (footerContainer) {
+          const phoneElement = footerContainer.querySelector('p:nth-child(3)');
+          const emailElement = footerContainer.querySelector('p:nth-child(4)');
+          const addressElement = footerContainer.querySelector('p:nth-child(2)');
+          
+          if (phoneElement && configuracoes.telefone) {
+            phoneElement.innerHTML = `📞 Contato: ${configuracoes.telefone}`;
+          }
+          if (emailElement && configuracoes.email) {
+            emailElement.innerHTML = `✉️ E-mail: ${configuracoes.email}`;
+          }
+          if (addressElement && configuracoes.endereco) {
+            addressElement.innerHTML = `📍 Endereço: ${configuracoes.endereco}`;
+          }
+        }
       }
     }
+  } catch (error) {
+    console.error('Erro ao atualizar configurações:', error);
   }
 }
 
 // Atualizar configurações na inicialização
 updateSiteConfig();
 
-// Verificar atualizações de configuração
-setInterval(updateSiteConfig, 10000);
+// Verificar atualizações de configuração a cada 60 segundos
+setInterval(updateSiteConfig, 60000);
