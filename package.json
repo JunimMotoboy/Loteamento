@@ -2,10 +2,10 @@
   "name": "loteamento-ibiza-backend",
   "version": "1.0.0",
   "description": "Backend para sistema de loteamento Ibiza com dashboard administrativo",
-  "main": "server.js",
+  "main": "server-simple.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server-simple.js",
+    "dev": "nodemon server-simple.js",
     "init-db": "node scripts/init-database.js"
   },
   "keywords": [

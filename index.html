@@ -8,12 +8,429 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
       rel="shortcut icon"
       href="./img/Logo caiçaras.png"
       type="image/x-icon"
     />
+    
+    <style>
+      /* Reset */
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      html {
+          scroll-behavior: smooth;
+      }
+
+      /* Estilos nav */
+      .hero {
+          background-color: rgba(8, 8, 8, 0.635); 
+          padding:20px 40px;
+          color: #fff;
+          width: 100vw; 
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center; 
+          font-family: "Nunito", sans-serif;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1000; 
+          backdrop-filter: blur(30px);
+          box-shadow:  0px 0px 30px rgba(227, 228, 237, 0.37);
+          border: 1.5px solid rgba(255, 255, 255, 0.18);
+      }
+
+      nav ul {
+          display: flex;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      nav ul li {
+          margin: 0 15px; 
+          opacity: 1;
+          transform: translateX(0); 
+          transition: transform 0.6s ease-out, opacity 0.6s ease-out; 
+      }
+
+      .nav-container {
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          width: 100%;
+          position: relative;
+          margin-right: 80px;
+      }
+
+      .logo{
+          top: 10%;
+          left: 50%;
+          transition: all 0.5s ease-in-out;
+      }
+
+      .logo img {
+          height: 300px; 
+          transition: height 0.5s ease-in-out;
+      }
+
+      .hero a {
+          text-decoration: none;
+          color: whitesmoke; 
+          transition: color 0.3s ease-out, transform 0.3s ease-out, opacity 0.3s ease-out;
+      }
+
+      .hero a:hover {
+          color: #fff; 
+          transform: scale(1.2); 
+          opacity: 0.8; 
+      }
+
+      /* Estilos div img */
+      .img-hero {
+          position: relative; 
+          width: 100%;
+          height: 100vh;
+          background: linear-gradient(rgba(0, 0, 0, 0.744), rgba(0, 0, 0, 0.5)),
+                      url('./img/ibiza-fundo.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          font-family: 'Oswald', sans-serif;
+          overflow: hidden;
+      }
+      
+      .hero-content {
+          margin-top: 15px;
+          position: relative;
+          color: #fff;
+          z-index: 2;
+          transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100vw;
+      }
+
+      .hero-content h1 {
+          text-shadow: 7px 9px 8px black;
+          font-weight: 700;
+          text-transform: uppercase;
+          transition: 2s ease-in-out;
+          font-size:40px;
+          padding: 0 30px 0 30px;
+          opacity: 1;
+          transform: translateX(0);
+      }
+
+      .hero-content h1:hover {
+          cursor: pointer;
+      }
+
+      body{
+          background-color: rgba(128, 128, 128, 0.201);   
+      }
+
+      main{
+          display: flex;
+          flex-direction: column;
+      }
+
+      /* Estilos específicos para os cards */
+      #cards-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+          padding: 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+
+      .card {
+          width: 280px !important;
+          max-width: 280px;
+          min-width: 250px;
+          box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 24px;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          background: #fff;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+          transform: translateY(-5px);
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 16px 32px;
+      }
+
+      .card .carousel-inner {
+          height: 200px;
+          overflow: hidden;
+          border-radius: 12px 12px 0 0;
+          position: relative;
+      }
+
+      .card .carousel-item {
+          height: 200px !important;
+          width: 100% !important;
+          overflow: hidden;
+          position: relative;
+      }
+
+      .card .carousel-item img {
+          width: 100% !important;
+          height: 200px !important;
+          object-fit: cover;
+          transition: none !important;
+          transform: none !important;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          max-width: 100%;
+          max-height: 200px;
+      }
+
+      .card-body {
+          text-align: center;
+          flex-direction: column;
+          justify-content: center;
+          display: flex;
+          padding: 1rem;
+      }
+
+      .card-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: #333;
+      }
+
+      .card-text {
+          font-size: 0.9rem;
+          color: #666;
+          margin-bottom: 0.5rem;
+      }
+
+      .card-body h5 {
+          color: #007bff;
+          font-weight: 700;
+          margin-bottom: 1rem;
+      }
+
+      .buttons {
+          display: flex !important;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+      }
+
+      .buttons .btn {
+          font-size: 0.85rem;
+          padding: 0.4rem 0.8rem;
+          border-radius: 6px;
+          font-weight: 500;
+      }
+
+      .btn-card {
+          display: block;
+          margin: 30px auto; 
+          padding: 10px 20px;
+          font-size: 18px;
+          font-weight: bold;
+          color: white;
+          background-color: #007bff; 
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn-card:hover {
+          background-color: #0057b3e6;
+          transform: scale(1.1); 
+      }
+
+      .footer {
+          background-color: #343a40;
+          color: white;
+          text-align: center;
+          padding: 40px 0;
+          margin-top: 30px;
+      }
+
+      .footer .container {
+          max-width: 600px;
+          margin: auto;
+      }
+
+      .footer p {
+          margin: 5px 0;
+          font-size: 16px;
+      }
+
+      .img-foot{
+          height: 40px;
+          width: auto;
+      }
+
+      /* Estilo do carrossel principal */
+      #carouselPrincipal {
+          margin: 20px auto;
+          max-width: 1200px;
+          width: 100%;
+          height: 500px;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+          position: relative;
+          background: linear-gradient(145deg, #f0f0f0, #cacaca);
+      }
+
+      .carousel-inner-principal {
+          position: relative;
+          width: 100%;
+          height: 500px;
+          overflow: hidden;
+      }
+
+      .carousel-inner-principal img {
+          width: 100%;
+          height: 500px;
+          object-fit: cover;
+          display: block;
+          transition: none;
+      }
+
+      .carousel-item {
+          position: relative;
+          width: 100%;
+          height: 500px;
+          overflow: hidden;
+      }
+
+      /* Captions melhoradas */
+      .carousel-caption {
+          position: absolute;
+          bottom: 50px;
+          left: 50px;
+          right: 50px;
+          background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+          color: white;
+          padding: 25px;
+          border-radius: 12px;
+          text-align: left;
+          backdrop-filter: blur(15px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .carousel-caption h5 {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 10px;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+          color: #fff;
+      }
+
+      .carousel-caption p {
+          font-size: 1.1rem;
+          margin-bottom: 0;
+          opacity: 0.9;
+          line-height: 1.4;
+      }
+
+      /* Título da seção */
+      .section-title {
+          text-align: center;
+          font-size: 2.8rem;
+          color: #333;
+          margin: 50px 0 30px;
+          font-weight: 700;
+          position: relative;
+          font-family: 'Oswald', sans-serif;
+      }
+
+      .section-title::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 4px;
+          background: linear-gradient(90deg, #007bff, #0056b3);
+          border-radius: 2px;
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+          .hero-content h1 {
+              font-size: 24px;
+          }
+          
+          .logo img{
+              height: 160px;
+              margin-bottom: 20px;
+          }
+          
+          #carouselPrincipal {
+              margin: 15px;
+              border-radius: 10px;
+              height: 300px;
+          }
+
+          .carousel-inner-principal {
+              height: 300px;
+          }
+
+          .carousel-inner-principal img {
+              height: 300px;
+          }
+
+          .carousel-item {
+              height: 300px;
+          }
+
+          .carousel-caption {
+              bottom: 20px;
+              left: 20px;
+              right: 20px;
+              padding: 15px;
+          }
+
+          .carousel-caption h5 {
+              font-size: 1.4rem;
+          }
+
+          .carousel-caption p {
+              font-size: 0.9rem;
+          }
+
+          .section-title {
+              font-size: 2.2rem;
+              margin: 30px 0 20px;
+          }
+      }
+    </style>
   </head>
 
   <header class="hero">
@@ -21,7 +438,7 @@
       <ul class="nav-links">
         <li><a href="#cards-container">Lotes</a></li>
         <li><a href="#contato">Contato</a></li>
-        <li><a href="dashboard.html" title="Painel Administrativo">
+        <li><a href="login.html" title="Painel Administrativo">
           <i class="fas fa-cog"></i>
         </a></li>
       </ul>
@@ -39,67 +456,58 @@
         </div>
       </div>
       
- <!-- Carrossel Principal Melhorado -->
-<section id="carouselPrincipal" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover" data-bs-touch="true">
-  <!-- Indicadores melhorados -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1 - Loteamento Premium"></button>
-    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="1" aria-label="Slide 2 - Localização Privilegiada"></button>
-    <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="2" aria-label="Slide 3 - Investimento Seguro"></button>
-  </div>
-  
-  <div class="carousel-inner carousel-inner-principal">
-    <!-- Slide 1 -->
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="img/carroussel-1.jpg" alt="Vista panorâmica do Loteamento Ibiza - Lotes premium com infraestrutura completa" loading="eager">
-      <div class="carousel-caption">
-        <h5>🏡 Loteamento Premium</h5>
-        <p>Conheça nossos lotes de alto padrão com toda infraestrutura necessária para realizar seus sonhos</p>
-      </div>
-    </div>
-    
-    <!-- Slide 2 -->
-    <div class="carousel-item">
-      <img class="d-block w-100" src="img/carroussel-2.jpg" alt="Localização estratégica do Loteamento Ibiza com fácil acesso" loading="lazy">
-      <div class="carousel-caption">
-        <h5>📍 Localização Privilegiada</h5>
-        <p>Área estratégica com fácil acesso, próximo a centros urbanos e com infraestrutura completa</p>
-      </div>
-    </div>
-    
-    <!-- Slide 3 -->
-    <div class="carousel-item">
-      <img class="d-block w-100" src="img/carroussel-3.jpg" alt="Investimento seguro no Loteamento Ibiza - Valorização garantida" loading="lazy">
-      <div class="carousel-caption">
-        <h5>💰 Investimento Seguro</h5>
-        <p>Garanta seu lote com as melhores condições de pagamento e valorização garantida</p>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Controles melhorados -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="prev" aria-label="Slide anterior">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="next" aria-label="Próximo slide">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Próximo</span>
-  </button>
-</section>
+      <!-- Carrossel Principal -->
+      <section id="carouselPrincipal" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#carouselPrincipal" data-bs-slide-to="2"></button>
+        </div>
+        
+        <div class="carousel-inner carousel-inner-principal">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="./img/carroussel-1.jpg" alt="Loteamento Premium">
+            <div class="carousel-caption">
+              <h5>🏡 Loteamento Premium</h5>
+              <p>Conheça nossos lotes de alto padrão com toda infraestrutura necessária para realizar seus sonhos</p>
+            </div>
+          </div>
+          
+          <div class="carousel-item">
+            <img class="d-block w-100" src="./img/carroussel-2.jpg" alt="Localização Privilegiada">
+            <div class="carousel-caption">
+              <h5>📍 Localização Privilegiada</h5>
+              <p>Área estratégica com fácil acesso, próximo a centros urbanos e com infraestrutura completa</p>
+            </div>
+          </div>
+          
+          <div class="carousel-item">
+            <img class="d-block w-100" src="./img/carroussel-3.jpg" alt="Investimento Seguro">
+            <div class="carousel-caption">
+              <h5>💰 Investimento Seguro</h5>
+              <p>Garanta seu lote com as melhores condições de pagamento e valorização garantida</p>
+            </div>
+          </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPrincipal" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </section>
 
-<h2 class="section-title">Lotes disponíveis</h2>
+      <h2 class="section-title">Lotes disponíveis</h2>
 
-
-
-      
       <div id="cards-container" class="d-flex flex-wrap gap-4 justify-content-center mt-5"></div>
 
-      <button class="btn-card">Ver Mais</button>
+      <button class="btn-card" onclick="mostrarMaisLotes()">Ver Mais</button>
     </main>
+    
     <footer id="contato" class="footer">
       <div class="container">
-        <img class="img-foot" src="./img/GRUPO VECCHI.jpg" alt="" />
+        <img class="img-foot" src="./img/GRUPO VECCHI.jpg" alt="Grupo VECCHI" />
         <p><strong>Grupo VECCHI</strong></p>
         <p>📍 Endereço: Av. dos Loteamentos, 123 - Cidade, Estado</p>
         <p>📞 Contato: (34) 99999-9999</p>
@@ -109,5 +517,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/script.js"></script>
+    <script>
+      // Função para mostrar mais lotes
+      function mostrarMaisLotes() {
+        alert('Em breve mais lotes disponíveis! Entre em contato pelo WhatsApp para mais informações.');
+      }
+    </script>
   </body>
 </html>
